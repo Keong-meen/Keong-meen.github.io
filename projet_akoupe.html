@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet Akoupé-Bacon — KKM Caliel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f1923;--ink2:#2c3e50;--muted:#6b7a8d;--accent:#1a8a6a;--accent2:#0a5c8a;--gold:#c8963e;--bg:#f8f6f1;--bg2:#ffffff;--border:#e2ddd4;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,246,241,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--accent2);}
+.nav-back{font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+.hero{background:var(--ink);padding:8rem 2rem 5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,138,106,0.2) 0%,transparent 70%);}
+.hero-tag{display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(26,138,106,0.2);color:#4ecda0;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(26,138,106,0.3);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;color:white;line-height:1.2;max-width:800px;margin:0 auto 1rem;}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.55);margin-bottom:3rem;}
+.hero-meta{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#4ecda0;}
+.meta-lbl{font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;}
+.container{max-width:900px;margin:0 auto;padding:0 2rem;}
+.container-wide{max-width:1100px;margin:0 auto;padding:0 2rem;}
+section{padding:4rem 0;}
+.section-label{font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--ink);margin-bottom:1.5rem;}
+.section-title::after{content:'';display:block;width:40px;height:3px;background:var(--accent);margin-top:0.75rem;}
+p{margin-bottom:1rem;color:var(--ink2);font-size:0.95rem;}
+.highlight-box{background:var(--bg2);border-left:4px solid var(--accent);padding:1.5rem 2rem;border-radius:0 6px 6px 0;margin:2rem 0;}
+.highlight-box p{margin:0;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:2rem 0;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.25rem;text-align:center;}
+.stat-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--accent);}
+.stat-lbl{font-size:0.75rem;color:var(--muted);margin-top:4px;}
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0;}
+.map-grid-1{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:2rem 0;}
+.map-img{width:100%;border-radius:6px;border:1px solid var(--border);display:block;}
+.map-caption{font-size:0.78rem;color:var(--muted);text-align:center;margin-top:0.5rem;font-style:italic;}
+.method-steps{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0;}
+.method-step{display:flex;gap:1.5rem;align-items:flex-start;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;}
+.step-content h4{font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:0.25rem;}
+.step-content p{margin:0;font-size:0.88rem;color:var(--muted);}
+.results-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin:1.5rem 0;}
+.results-table th{background:var(--accent);color:white;padding:10px 14px;text-align:left;font-weight:500;}
+.results-table td{padding:9px 14px;border-bottom:1px solid var(--border);}
+.results-table tr:nth-child(even) td{background:var(--bg);}
+.results-table td.positive{color:#c0392b;font-weight:500;}
+.results-table td.negative{color:var(--accent);font-weight:500;}
+.kappa-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;}
+.kappa-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.25rem;display:flex;flex-direction:column;gap:0.5rem;}
+.kappa-year{font-size:0.72rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);}
+.kappa-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--accent);}
+.kappa-label{font-size:0.82rem;color:var(--muted);}
+.kappa-badge{display:inline-block;padding:3px 10px;border-radius:3px;font-size:0.72rem;font-weight:500;background:rgba(26,138,106,0.1);color:var(--accent);}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:1rem 0;}
+.tag{padding:4px 12px;border-radius:3px;font-size:0.75rem;font-weight:500;background:var(--bg);border:1px solid var(--border);color:var(--ink2);}
+.nav-projects{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;}
+.nav-projects a{display:inline-block;padding:12px 28px;background:var(--accent2);color:white;border-radius:4px;text-decoration:none;font-size:0.85rem;font-weight:500;transition:background 0.2s;margin:0 6px;}
+.nav-projects a:hover{opacity:0.85;}
+footer{background:#080f15;padding:1.5rem 2rem;text-align:center;font-size:0.78rem;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.4);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">KKM Caliel</div>
+  <a href="index.html" class="nav-back">← Retour au portfolio</a>
+</nav>
+
+<div class="hero">
+  <div style="position:relative;z-index:1;">
+    <p class="hero-tag">Mémoire de Master 2 — 2022</p>
+    <h1 class="hero-title">Outils de Protection contre la Sédimentation de la Retenue d'Eau d'Akoupé-Bacon</h1>
+    <p class="hero-sub">Sud-Est de la Côte d'Ivoire — Approche Géomatique</p>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="meta-val">16,25/20</div><div class="meta-lbl">Note — Mention Bien</div></div>
+      <div class="meta-item"><div class="meta-val">2002–2020</div><div class="meta-lbl">Période d'analyse</div></div>
+      <div class="meta-item"><div class="meta-val">3,47 km²</div><div class="meta-lbl">Superficie sous-bassin</div></div>
+      <div class="meta-item"><div class="meta-val">3 zones</div><div class="meta-lbl">Périmètres de protection</div></div>
+    </div>
+  </div>
+</div>
+
+<section style="background:var(--bg2);">
+  <div class="container">
+    <p class="section-label">Contexte & Problématique</p>
+    <h2 class="section-title">La retenue d'Akoupé-Bacon face à l'envasement</h2>
+    <p>La retenue d'eau d'Akoupé-Bacon, mise en service en 1975, constitue la principale source d'alimentation en eau potable de la commune de Bacon et de ses environs, desservie par la SODECI. Située à environ 146 km d'Abidjan dans la région de la Mé, cette retenue d'une longueur de 1,6 km est alimentée par deux affluents saisonniers dans un sous-bassin versant de 3,47 km².</p>
+    <p>Ces deux dernières décennies, la forte croissance démographique et l'extension urbaine ont conduit à l'occupation anarchique des berges. Cette anthropisation, conjuguée à une pluviométrie annuelle d'environ 1 300 mm, génère une érosion intense qui alimente la retenue en sédiments et menace progressivement sa capacité de stockage.</p>
+    <div class="highlight-box">
+      <p><strong>Objectif principal :</strong> Démontrer l'intérêt du SIG dans la protection des ressources en eau contre la sédimentation, à travers l'analyse de la dynamique d'occupation du sol, la cartographie de la vulnérabilité à l'érosion et la délimitation de périmètres de protection autour de la retenue.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-val">1975</div><div class="stat-lbl">Mise en service</div></div>
+      <div class="stat-card"><div class="stat-val">1,6 km</div><div class="stat-lbl">Longueur retenue</div></div>
+      <div class="stat-card"><div class="stat-val">1 300 mm</div><div class="stat-lbl">Pluviométrie annuelle</div></div>
+      <div class="stat-card"><div class="stat-val">18 ans</div><div class="stat-lbl">Période d'analyse</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);">
+  <div class="container">
+    <p class="section-label">Zone d'étude</p>
+    <h2 class="section-title">Présentation du sous-bassin versant</h2>
+    <div class="map-grid-1">
+      <div>
+        <img src="images/akoupe_zone_etude.jpg" alt="Carte de situation — Akoupé-Bacon" class="map-img">
+        <p class="map-caption">Figure 1 — Carte de situation du sous-bassin versant de la retenue de Bacon (Latitude 6°20'0 – 6°22'39 N / Longitude 3°54'10 – 3°55'30 W)</p>
+      </div>
+    </div>
+    <p>Le sous-bassin versant, d'une superficie de 3,47 km², est situé au Sud-Est de la Côte d'Ivoire dans la région de la Mé. Le contexte climatique est équatorial de transition avec quatre saisons. Les principaux types de sols sont les sols ferrallitiques remaniés faiblement indurés au nord et les sols podzoliques à gley au sud du bassin.</p>
+  </div>
+</section>
+
+<section style="background:var(--bg2);">
+  <div class="container">
+    <p class="section-label">Approche méthodologique</p>
+    <h2 class="section-title">Démarche en trois étapes</h2>
+    <div class="method-steps">
+      <div class="method-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Analyse diachronique de l'occupation du sol (2002–2020)</h4>
+          <p>Classification supervisée par Maximum de Vraisemblance des images Landsat 7 ETM+ (2002) et Landsat 8 OLI (2020) sous ENVI 4.5. Six classes identifiées : Forêt dense, Forêt dégradée, Eau, Habitats, Sols nus, Cultures. Validation par matrices de confusion.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Cartographie multicritère de la vulnérabilité à la sédimentation</h4>
+          <p>Combinaison de 5 facteurs par analyse AHP Saaty (1977) : érodibilité des sols (K), pente topographique (P), occupation du sol (OC), exposition des versants (EP) et érosivité des pluies (E). Indice de vulnérabilité : Is = P×0,35 + EP×0,10 + E×0,35 + OC×0,31 + K×0,11. Ratio de cohérence RC = 5,7% &lt; 10%.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Délimitation des périmètres de protection par SIG</h4>
+          <p>Trois périmètres définis conformément à l'article 34 du Code de l'Eau de Côte d'Ivoire : PPI (100 m), PPR (300 m max) et PPE (limite du sous-bassin). Délimitation basée sur la carte de vulnérabilité et le sens d'écoulement hydrologique.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">Landsat 7 ETM+ (2002)</span><span class="tag">Landsat 8 OLI (2020)</span>
+      <span class="tag">ENVI 4.5</span><span class="tag">ArcGIS 10.5</span>
+      <span class="tag">Maximum de Vraisemblance</span><span class="tag">Analyse AHP Saaty</span>
+      <span class="tag">Raster Calculator</span><span class="tag">SIG</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);">
+  <div class="container-wide">
+    <div class="container" style="padding:0;">
+      <p class="section-label">Résultats — Occupation du sol</p>
+      <h2 class="section-title">Dynamique de l'occupation du sol 2002–2020</h2>
+    </div>
+    <div class="map-grid">
+      <div>
+        <img src="images/akoupe_occ_2002.jpg" alt="Carte occupation du sol 2002" class="map-img">
+        <p class="map-caption">Carte d'occupation du sol — Landsat 7 ETM+ (2002)<br>Précision globale : 95,77% — Kappa : 0,94</p>
+      </div>
+      <div>
+        <img src="images/akoupe_occ_2020.jpg" alt="Carte occupation du sol 2020" class="map-img">
+        <p class="map-caption">Carte d'occupation du sol — Landsat 8 OLI (2020)<br>Précision globale : 87,72% — Kappa : 0,84</p>
+      </div>
+    </div>
+    <div class="container" style="padding:0;">
+      <table class="results-table">
+        <thead><tr><th>Classe d'occupation</th><th>2002 (km²)</th><th>2002 (%)</th><th>2020 (km²)</th><th>2020 (%)</th><th>Évolution</th></tr></thead>
+        <tbody>
+          <tr><td>Forêt dense</td><td>0,857</td><td>24,71%</td><td>0,576</td><td>16,61%</td><td class="negative">−8,10%</td></tr>
+          <tr><td>Forêt dégradée</td><td>1,098</td><td>31,67%</td><td>1,279</td><td>36,86%</td><td class="positive">+5,19%</td></tr>
+          <tr><td>Eau</td><td>0,102</td><td>2,96%</td><td>0,080</td><td>2,30%</td><td class="negative">−0,66%</td></tr>
+          <tr><td>Habitats</td><td>0,254</td><td>7,33%</td><td>0,792</td><td>22,84%</td><td class="positive">+15,51%</td></tr>
+          <tr><td>Sols nus</td><td>0,722</td><td>20,83%</td><td>0,275</td><td>7,93%</td><td class="negative">−12,90%</td></tr>
+          <tr><td>Cultures</td><td>0,433</td><td>12,50%</td><td>0,467</td><td>13,45%</td><td class="positive">+0,95%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.82rem;color:var(--muted);font-style:italic;">Le taux d'anthropisation est passé de 40,66% (2002) à 44,22% (2020), favorisant une intensification de l'érosion et un risque accru de sédimentation de la retenue.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg2);">
+  <div class="container-wide">
+    <div class="container" style="padding:0;">
+      <p class="section-label">Résultats — Vulnérabilité & Protection</p>
+      <h2 class="section-title">Cartographie de la vulnérabilité et périmètres de protection</h2>
+    </div>
+    <div class="map-grid">
+      <div>
+        <img src="images/akoupe_vulnerabilite.jpg" alt="Carte de vulnérabilité à la sédimentation" class="map-img">
+        <p class="map-caption">Carte de vulnérabilité à la sédimentation de la retenue d'Akoupé-Bacon<br>3 classes : faible (0,89%), moyenne (43,18%), forte (55,92%)</p>
+      </div>
+      <div>
+        <img src="images/akoupe_perimetres.jpg" alt="Carte des périmètres de protection" class="map-img">
+        <p class="map-caption">Carte des périmètres de protection — PPI, PPR, PPE<br>Délimitation conforme au Code de l'Eau de Côte d'Ivoire</p>
+      </div>
+    </div>
+    <div class="container" style="padding:0;">
+      <div class="highlight-box">
+        <p><strong>Résultats clés :</strong> La quasi-totalité du bassin (99,1%) présente une vulnérabilité moyenne à forte à la sédimentation. Les zones à forte vulnérabilité (55,92%) sont principalement associées à la démographie autour de la retenue et à la mise à nu des sols par les zones d'habitation.</p>
+      </div>
+      <table class="results-table">
+        <thead><tr><th>Périmètre</th><th>Rayon</th><th>Superficie</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PPI</strong> — Protection Immédiat</td><td>100 m</td><td>~1,02 km²</td><td>Interdiction d'accès, aménagements anti-érosifs</td></tr>
+          <tr><td><strong>PPR</strong> — Protection Rapproché</td><td>300 m max</td><td>~1,70 km²</td><td>Zone tampon, sens d'écoulement hydrologique</td></tr>
+          <tr><td><strong>PPE</strong> — Protection Éloigné</td><td>Limite bassin</td><td>Reste du sous-bassin</td><td>Zone de vigilance, revégétalisation recommandée</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);">
+  <div class="container">
+    <p class="section-label">Validation des classifications</p>
+    <h2 class="section-title">Matrices de confusion & Indices de Kappa</h2>
+    <div class="kappa-grid">
+      <div class="kappa-card">
+        <p class="kappa-year">Landsat 7 ETM+ — 2002</p>
+        <p class="kappa-val">κ = 0,94</p>
+        <p class="kappa-label">Précision globale : 95,77%</p>
+        <span class="kappa-badge">Très bonne classification</span>
+      </div>
+      <div class="kappa-card">
+        <p class="kappa-year">Landsat 8 OLI — 2020</p>
+        <p class="kappa-val">κ = 0,84</p>
+        <p class="kappa-label">Précision globale : 87,72%</p>
+        <span class="kappa-badge">Très bonne classification</span>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);font-style:italic;">Classification évaluée selon l'échelle de Landis et Koch. Un Kappa &gt; 0,80 indique une très bonne concordance entre la classification et la réalité terrain.</p>
+  </div>
+</section>
+
+<section style="background:var(--bg2);">
+  <div class="container">
+    <p class="section-label">Conclusion & Perspectives</p>
+    <h2 class="section-title">Apport du SIG à la gestion de la ressource en eau</h2>
+    <p>Ce travail a démontré l'intérêt que peut apporter un outil tel que le SIG dans l'aménagement des bassins versants et la protection des ressources en eau contre la sédimentation. La combinaison de la télédétection, de l'analyse multicritère AHP et du SIG a permis de produire des outils d'aide à la décision concrets et opérationnels.</p>
+    <p>Les périmètres de protection délimités constituent une base réglementaire pour les autorités locales, conformément au décret d'application n°2013-440 du Code de l'Eau de Côte d'Ivoire.</p>
+    <div class="tags">
+      <span class="tag">Hydrogéologie</span><span class="tag">Gestion bassins versants</span>
+      <span class="tag">Sédimentation</span><span class="tag">Périmètres de protection</span>
+      <span class="tag">Code de l'Eau CI</span><span class="tag">Analyse multicritère AHP</span>
+      <span class="tag">Télédétection</span><span class="tag">Côte d'Ivoire</span>
+    </div>
+  </div>
+</section>
+
+<div class="nav-projects">
+  <a href="index.html" style="background:var(--muted);">← Retour au portfolio</a>
+  <a href="projet_lagune.html">Projet suivant : Lagune Ébrié →</a>
+</div>
+
+<footer>
+  <p>© 2026 Kouassi Keong-meen Caliel — <a href="index.html">Retour au portfolio</a></p>
+</footer>
+</body>
+</html>
